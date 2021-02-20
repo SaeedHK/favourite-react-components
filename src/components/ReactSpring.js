@@ -39,14 +39,14 @@ function ReactSpring() {
         position: 'fixed',
         left: 0,
         top: 0,
-        background: 'green',
+        background: '#6D28D9',
         width: '100vw',
         height: '100vh',
       }}
     >
       <animated.path
         d={props.t.interpolate(createPath)}
-        stroke="red"
+        stroke="#A78BFA"
         fill="none"
         stroke-width="5"
       ></animated.path>
