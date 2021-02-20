@@ -2,7 +2,7 @@ import ReactSpring from './components/ReactSpring';
 
 function App() {
   return (
-    <div>
+    <div style={{ padding: '50px' }}>
       <ReactSpring />
     </div>
   );
