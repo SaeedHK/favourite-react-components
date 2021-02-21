@@ -8,9 +8,9 @@ function ReactSpring() {
 
   const xmin = -5;
   const xmax = 5;
-  const n_hills = Math.floor(Math.random() * 3) + 1;
+  const n_hills = Math.floor(Math.random() * 6) + 1;
   const n_hills_range = [...Array(n_hills).keys()];
-  const means = n_hills_range.map(() => Math.random() * (xmax / 4 - xmin / 4) + xmin / 4);
+  const means = n_hills_range.map(() => Math.random() * (xmax / 2 - xmin / 2) + xmin / 2);
   const sigmas = n_hills_range.map(() => Math.random() * 0.4 + 0.05);
   const pathFunction = (x) => {
     let y_unnorm = n_hills_range
@@ -18,6 +18,8 @@ function ReactSpring() {
       .reduce((a, b) => a + b, 0);
     return y_unnorm / n_hills;
   };
+
+  const offset = (Math.random() + 0.2) / 1.2;
 
   const eps = 0.3;
   const N = 300;
@@ -30,7 +32,7 @@ function ReactSpring() {
       .map((x) => {
         let y = pathFunction(x);
         let x_norm = ((x - xmin) / (xmax - xmin)) * innerWidth;
-        let y_norm = -(y / (xmax - xmin)) * innerWidth + (1 / 2) * innerHeight;
+        let y_norm = -(y / (xmax - xmin)) * outerWidth + offset * outerHeight;
         return `${x_norm} ${y_norm}`;
       })
       .join(' L');
@@ -38,7 +40,9 @@ function ReactSpring() {
     return path;
   };
 
-  const props = useSpring({ t: 1, from: { t: 0 }, config: { duration: 2000 } });
+  const duration = Math.random() * 5000;
+
+  const props = useSpring({ t: 1, from: { t: 0 }, config: { duration } });
 
   return (
     <svg
